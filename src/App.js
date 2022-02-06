@@ -9,58 +9,67 @@ import { Route, Routes } from "react-router-dom";
 
 
 class App extends React.Component {
-  constructor() {
-    super();
+    constructor() {
+        super();
 
-    this.state = {
-      currentUser : null
+        this.state = {
+            currentUser: null
+        }
     }
-  }
 
-  unsubscribeFromAuth = null
+    unsubscribeFromAuth = null
 
-  componentDidMount(){
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      
-      if(userAuth) {
-        const userRef = await createUserProfileDocument(userAuth)
+    componentDidMount() {
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
-        userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
-          }, () => {
-            console.log(this.state);
-          })
-        })
-      }
+                if (userAuth) {
+                    const userRef = await createUserProfileDocument(userAuth)
 
-      // createUserProfileDocument(user)
-      this.setState({currentUser:userAuth})
-      
-    })
-    
-  } 
+                    userRef.onSnapshot(snapShot => {
+                        this.setState({
+                            currentUser: {
+                                id: snapShot.id,
+                                ...snapShot.data()
+                            }
+                        }, () => {
+                            console.log(this.state);
+                        })
+                    })
+                }
 
- 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth()
-  }
+                // createUserProfileDocument(user)
+                this.setState({ currentUser: userAuth })
 
-  render() {
-    return (
-      <div>
-        <Header currentUser={this.state.currentUser}/>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/signin" element={<SignInAndSingUpPage />} />
-        </Routes>
-      </div>
-    );
-  }
+            })
+            //
+    }
+
+
+    componentWillUnmount() {
+        this.unsubscribeFromAuth()
+    }
+
+    render() {
+        return ( <
+            div >
+            <
+            Header currentUser = { this.state.currentUser }
+            /> <
+            Routes >
+            <
+            Route path = "/"
+            element = { < HomePage / > }
+            /> <
+            Route path = "/shop"
+            element = { < ShopPage / > }
+            /> <
+            Route path = "/signin"
+            element = { < SignInAndSingUpPage / > }
+            /> <
+            /Routes> <
+            /div>
+        );
+    }
 }
 
 export default App;
