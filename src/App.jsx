@@ -50,24 +50,17 @@ class App extends React.Component {
     }
 
     render() {
-        return ( <
-            div >
-            <
-            Header currentUser = { this.state.currentUser }
-            /> <
-            Routes >
-            <
-            Route path = "/"
+        return ( 
+        <div >
+            <Header currentUser = { this.state.currentUser }
+            /> <Routes >
+            <Route path = "/"
             element = { < HomePage / > }
-            /> <
-            Route path = "/shop"
+            /> <Route path = "/shop"
             element = { < ShopPage / > }
-            /> <
-            Route path = "/signin"
+            /> <Route path = "/signin"
             element = { < SignInAndSingUpPage / > }
-            /> <
-            /Routes> <
-            /div>
+            /> </Routes> </div>
         );
     }
 }
